@@ -7,9 +7,9 @@
 
 import UIKit
 
-class EpisodeViewController: UIViewController {
+final class EpisodeViewController: UIViewController {
 
-    @IBOutlet weak var episodeTableView: UITableView! {
+    @IBOutlet private weak var episodeTableView: UITableView! {
         didSet {
             episodeTableView.dataSource = self
             episodeTableView.delegate = self
@@ -37,7 +37,7 @@ class EpisodeViewController: UIViewController {
             }
             else {
                 print(error?.localizedDescription)
-                AlertManager.shared.showAlert(with: .wrongInput)
+                AlertManager.shared.showAlert(with: .wrongInput, localizeDescription: nil)
             }
         }
     }
@@ -51,7 +51,7 @@ extension EpisodeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeCell", for: indexPath) as? EpisodeTableViewCell, let model = allEpisodes?[indexPath.row] else {
-            AlertManager.shared.showAlert(with: .wrongInput)
+            AlertManager.shared.showAlert(with: .wrongInput, localizeDescription: nil)
             return UITableViewCell()
         }
         cell.configureCell(model: model)

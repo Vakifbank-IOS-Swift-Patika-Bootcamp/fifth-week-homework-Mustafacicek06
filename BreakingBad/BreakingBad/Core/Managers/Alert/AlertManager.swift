@@ -12,15 +12,15 @@ import UIKit
 
 
 protocol AlertShowable {
-    func showAlert(with error: AlertError)
+    func showAlert(with error: AlertError?,localizeDescription: String?)
 }
 
 
 final class AlertManager: AlertShowable {
     static let shared: AlertManager = .init()
     
-    func showAlert(with error: AlertError)  {
-        let alert = UIAlertController(title: "Opps!!", message: error.description, preferredStyle: .alert)
+    func showAlert(with error: AlertError?, localizeDescription: String?)  {
+        let alert = UIAlertController(title: "Opps!!", message: (error?.description ?? localizeDescription) ?? "", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Ok", style: .cancel))
         

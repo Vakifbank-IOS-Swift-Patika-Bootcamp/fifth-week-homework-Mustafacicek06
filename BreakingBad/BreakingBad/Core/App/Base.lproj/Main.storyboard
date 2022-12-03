@@ -212,20 +212,136 @@
             </objects>
             <point key="canvasLocation" x="-1517" y="870"/>
         </scene>
-        <!--View Controller-->
+        <!--Notes-->
         <scene sceneID="nE0-Ed-705">
             <objects>
-                <viewController id="ioC-zf-tZY" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NotesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ioC-zf-tZY" customClass="NotesViewController" customModule="BreakingBad" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="doK-0F-PVn">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sg9-JP-Ss5">
+                                <rect key="frame" x="5" y="99" width="383" height="665"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n48-KB-jZ2">
+                                <rect key="frame" x="250" y="59" width="127" height="35"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="note.text.badge.plus" catalog="system" title=" Add Note"/>
+                                <connections>
+                                    <action selector="addNoteButtonClicked:" destination="ioC-zf-tZY" eventType="touchUpInside" id="HR1-cB-J8W"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="UiV-I7-BL4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="n48-KB-jZ2" firstAttribute="top" secondItem="UiV-I7-BL4" secondAttribute="top" id="0s9-FY-12U"/>
+                            <constraint firstItem="UiV-I7-BL4" firstAttribute="bottom" secondItem="sg9-JP-Ss5" secondAttribute="bottom" constant="5" id="3BA-dy-0Y2"/>
+                            <constraint firstItem="sg9-JP-Ss5" firstAttribute="top" secondItem="UiV-I7-BL4" secondAttribute="top" constant="40" id="9eL-KT-zJr"/>
+                            <constraint firstItem="sg9-JP-Ss5" firstAttribute="leading" secondItem="UiV-I7-BL4" secondAttribute="leading" constant="5" id="E53-9X-mvW"/>
+                            <constraint firstItem="sg9-JP-Ss5" firstAttribute="top" secondItem="n48-KB-jZ2" secondAttribute="bottom" constant="5" id="ZPF-KW-B0Y"/>
+                            <constraint firstItem="UiV-I7-BL4" firstAttribute="trailing" secondItem="sg9-JP-Ss5" secondAttribute="trailing" constant="5" id="ejq-JY-a4b"/>
+                            <constraint firstItem="UiV-I7-BL4" firstAttribute="trailing" secondItem="n48-KB-jZ2" secondAttribute="trailing" constant="16" id="n78-Z4-Lg7"/>
+                        </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Notes" image="note.text" catalog="system" selectedImage="note.text" id="LA1-4z-CrL"/>
+                    <connections>
+                        <outlet property="notesTableView" destination="sg9-JP-Ss5" id="cac-DL-mOo"/>
+                        <segue destination="YCI-uB-mj6" kind="presentation" id="lH7-ei-Fci"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h3t-IF-PeD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-232" y="880"/>
+        </scene>
+        <!--Add Notes View Controller-->
+        <scene sceneID="Qb6-xI-Xpq">
+            <objects>
+                <viewController storyboardIdentifier="AddNotesViewController" id="YCI-uB-mj6" customClass="AddNotesViewController" customModule="BreakingBad" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nG2-4n-zx7">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="783"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Season" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KNh-aw-Ld2">
+                                <rect key="frame" x="126.66666666666669" y="189" width="140" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="s05-Sd-2JM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Episode" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ccV-K6-WqM">
+                                <rect key="frame" x="126.66666666666669" y="238" width="140" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="Hej-fX-alG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Your Note" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Zc-fe-IDC">
+                                <rect key="frame" x="126.66666666666669" y="343" width="140" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="Bp4-1M-qa8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Episode Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xUR-ry-POk">
+                                <rect key="frame" x="126.66666666666669" y="293" width="140" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="sq1-ix-QlG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Or Edit Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OWA-X8-UmI">
+                                <rect key="frame" x="113" y="74" width="167" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <color key="textColor" systemColor="linkColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="137-Gp-sLP">
+                                <rect key="frame" x="166" y="411" width="61" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="Vc7-i8-kAk"/>
+                                    <constraint firstAttribute="width" constant="61" id="m9f-8b-QXC"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Save"/>
+                                <connections>
+                                    <action selector="saveNoteButtonClicked:" destination="YCI-uB-mj6" eventType="touchUpInside" id="2It-he-6P6"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="X7V-Nv-Jig"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="KNh-aw-Ld2" firstAttribute="centerX" secondItem="nG2-4n-zx7" secondAttribute="centerX" id="03O-pO-Zfh"/>
+                            <constraint firstItem="4Zc-fe-IDC" firstAttribute="centerX" secondItem="nG2-4n-zx7" secondAttribute="centerX" id="8lc-tM-38K"/>
+                            <constraint firstItem="KNh-aw-Ld2" firstAttribute="top" secondItem="OWA-X8-UmI" secondAttribute="bottom" constant="87" id="JDt-z5-c8j"/>
+                            <constraint firstItem="137-Gp-sLP" firstAttribute="centerX" secondItem="nG2-4n-zx7" secondAttribute="centerX" id="KAm-b2-ZBN"/>
+                            <constraint firstItem="ccV-K6-WqM" firstAttribute="centerX" secondItem="nG2-4n-zx7" secondAttribute="centerX" id="YHs-qC-wTa"/>
+                            <constraint firstItem="OWA-X8-UmI" firstAttribute="top" secondItem="X7V-Nv-Jig" secondAttribute="top" constant="15" id="dIF-cI-DWQ"/>
+                            <constraint firstItem="137-Gp-sLP" firstAttribute="top" secondItem="4Zc-fe-IDC" secondAttribute="bottom" constant="34" id="eLq-oV-oyY"/>
+                            <constraint firstItem="ccV-K6-WqM" firstAttribute="top" secondItem="KNh-aw-Ld2" secondAttribute="bottom" constant="15" id="gCc-dT-9S5"/>
+                            <constraint firstItem="xUR-ry-POk" firstAttribute="top" secondItem="ccV-K6-WqM" secondAttribute="bottom" constant="21" id="hRR-ko-0Hv"/>
+                            <constraint firstItem="OWA-X8-UmI" firstAttribute="centerX" secondItem="nG2-4n-zx7" secondAttribute="centerX" id="nid-XZ-hLB"/>
+                            <constraint firstItem="xUR-ry-POk" firstAttribute="centerX" secondItem="nG2-4n-zx7" secondAttribute="centerX" id="suQ-ae-oCL"/>
+                            <constraint firstItem="4Zc-fe-IDC" firstAttribute="top" secondItem="xUR-ry-POk" secondAttribute="bottom" constant="16" id="uQE-5O-8qy"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="episodeLabel" destination="ccV-K6-WqM" id="Rvi-SV-0af"/>
+                        <outlet property="episodeTitleLabel" destination="xUR-ry-POk" id="rZJ-fj-wQ8"/>
+                        <outlet property="pageTitleLabel" destination="OWA-X8-UmI" id="NDM-TW-6HI"/>
+                        <outlet property="seasonLabel" destination="KNh-aw-Ld2" id="Py8-ev-Tav"/>
+                        <outlet property="yourNoteLabel" destination="4Zc-fe-IDC" id="wbw-H7-V4M"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="G3E-Yl-rnx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-183.96946564885496" y="1594.3661971830986"/>
         </scene>
         <!--Webview-->
         <scene sceneID="6YV-DN-Hv9">
@@ -257,6 +373,7 @@
                     <connections>
                         <segue destination="DBV-zJ-ybT" kind="relationship" relationship="viewControllers" id="9Nr-lD-w5K"/>
                         <segue destination="8xM-HI-pwp" kind="relationship" relationship="viewControllers" id="3Fy-Th-nUn"/>
+                        <segue destination="ioC-zf-tZY" kind="relationship" relationship="viewControllers" id="boI-g2-nQ0"/>
                         <segue destination="goB-bc-SWa" kind="relationship" relationship="viewControllers" id="l7p-VX-AYy"/>
                     </connections>
                 </tabBarController>
@@ -269,6 +386,8 @@
         <image name="book.fill" catalog="system" width="128" height="95"/>
         <image name="globe.americas.fill" catalog="system" width="128" height="123"/>
         <image name="homekit" catalog="system" width="128" height="104"/>
+        <image name="note.text" catalog="system" width="128" height="107"/>
+        <image name="note.text.badge.plus" catalog="system" width="128" height="108"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
