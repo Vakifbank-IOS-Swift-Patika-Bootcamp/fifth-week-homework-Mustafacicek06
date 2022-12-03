@@ -69,11 +69,21 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
         UITableView.automaticDimension
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let updateNoteVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AddNotesViewController") as? AddNotesViewController else {
+            return
+        }
+        updateNoteVC.episodeNote = episodeNotes[indexPath.row]
+        present(updateNoteVC, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             guard let deletingID = episodeNotes[indexPath.row].id else { return }
             CoreDataManager.shared.deleteEpisode(deleteItemID: deletingID)
-            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.fade)
+            episodeNotes.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
         }
     }
     
@@ -82,6 +92,7 @@ extension NotesViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         cell.configureCell(episode:  episodeModel ?? EpisodeNote())
+        
         return cell
     }
     

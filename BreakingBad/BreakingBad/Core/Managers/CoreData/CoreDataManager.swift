@@ -13,6 +13,7 @@ enum CoreDataKeys: String {
     case season
     case episodeTitle
     case note
+    case id
 }
 
 final class CoreDataManager {
@@ -33,6 +34,7 @@ final class CoreDataManager {
         episodeNote.setValue(season, forKeyPath: CoreDataKeys.season.rawValue)
         episodeNote.setValue(episodeTitle, forKeyPath: CoreDataKeys.episodeTitle.rawValue)
         episodeNote.setValue(note, forKeyPath: CoreDataKeys.note.rawValue)
+        episodeNote.setValue(UUID(), forKeyPath: CoreDataKeys.id.rawValue)
         
         do {
             try managedContext.save()
@@ -60,9 +62,25 @@ final class CoreDataManager {
     
     func deleteEpisode(deleteItemID: UUID) {
         getEpisodes().forEach { episode in
+            print("\(episode.id) delete id: \(deleteItemID)")
             if episode.id == deleteItemID {
                 managedContext.delete(episode)
                 try! managedContext.save()
+            }
+        }
+    }
+     
+    func updateEpisode(selectedEpisode: EpisodeNote, season: String, episodeNumber: String, episodeTitle: String, note: String ) {
+        getEpisodes().forEach { episode in
+            if episode.id == selectedEpisode.id {
+        
+              
+                episode.setValue(Int(season), forKeyPath: CoreDataKeys.season.rawValue)
+                episode.setValue(Int(episodeNumber), forKeyPath: CoreDataKeys.episode.rawValue)
+                episode.setValue(episodeTitle, forKeyPath: CoreDataKeys.episodeTitle.rawValue)
+                episode.setValue(Int8(note), forKeyPath: CoreDataKeys.note.rawValue)
+                try! managedContext.save()
+            
             }
         }
     }

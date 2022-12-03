@@ -17,7 +17,7 @@ final class NoteTableViewCell: UITableViewCell {
     
     func configureCell(episode: EpisodeNote) {
         episodeAndSeasonTitle.text = "Season: \(episode.season) Episode: \(episode.episode)"
-        episodeTitle.text = "Episode Title: \(episode.episodeTitle)"
+        episodeTitle.text = "Episode Title: \(episode.episodeTitle ?? "")"
         episodeNote.text = "\(episode.note)"
     }
 }

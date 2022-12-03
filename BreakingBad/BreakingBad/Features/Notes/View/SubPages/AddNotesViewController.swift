@@ -35,15 +35,26 @@ final class AddNotesViewController: UIViewController {
     }
     
     @IBAction func saveNoteButtonClicked(_ sender: Any) {
-        do {
-            try validateAllFields()
+      
+            do {
+                try validateAllFields()
+                updateOrAddScreenControl()
+                Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(delayedAction), userInfo: nil, repeats: false)
+                
+            } catch {
+                AlertManager.shared.showAlert(with: nil, localizeDescription: error.localizedDescription)
+            }
+        
+    }
+    
+    private func updateOrAddScreenControl() {
+        if episodeNote != nil {
+            CoreDataManager.shared.updateEpisode(selectedEpisode: episodeNote!, season: seasonLabel.text!, episodeNumber: episodeLabel.text!, episodeTitle: episodeTitleLabel.text! , note: yourNoteLabel.text! )
+            AlertManager.shared.showAlert(with: .success, localizeDescription: nil)
+        }
+        else {
             CoreDataManager.shared.saveEpisode(episode: Int8(episodeLabel.text ?? "0") ?? 0, season: Int8(seasonLabel.text ?? "0") ?? 0, episodeTitle: episodeTitleLabel.text! , note: Int8(yourNoteLabel.text ?? "0") ?? 0)
             AlertManager.shared.showAlert(with: .success, localizeDescription: nil)
-            
-            Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(delayedAction), userInfo: nil, repeats: false)
-
-        } catch {
-            AlertManager.shared.showAlert(with: nil, localizeDescription: error.localizedDescription)
         }
     }
     
