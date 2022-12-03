@@ -35,46 +35,42 @@ final class AddNotesViewController: UIViewController {
     }
     
     @IBAction func saveNoteButtonClicked(_ sender: Any) {
-      
-            do {
-                try validateAllFields()
-                updateOrAddScreenControl()
-                Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(delayedAction), userInfo: nil, repeats: false)
-                
-            } catch {
-                AlertManager.shared.showAlert(with: nil, localizeDescription: error.localizedDescription)
-            }
-        
+                validateAllFields()
+
     }
     
     private func updateOrAddScreenControl() {
         if episodeNote != nil {
             CoreDataManager.shared.updateEpisode(selectedEpisode: episodeNote!, season: seasonLabel.text!, episodeNumber: episodeLabel.text!, episodeTitle: episodeTitleLabel.text! , note: yourNoteLabel.text! )
-            AlertManager.shared.showAlert(with: .success, localizeDescription: nil)
+            AlertManager.shared.showAlert(with: .success, localizeDescription: nil,title: "Success")
         }
         else {
             CoreDataManager.shared.saveEpisode(episode: Int8(episodeLabel.text ?? "0") ?? 0, season: Int8(seasonLabel.text ?? "0") ?? 0, episodeTitle: episodeTitleLabel.text! , note: Int8(yourNoteLabel.text ?? "0") ?? 0)
-            AlertManager.shared.showAlert(with: .success, localizeDescription: nil)
+            AlertManager.shared.showAlert(with: .success, localizeDescription: nil,title: "Success")
         }
     }
     
     @objc func delayedAction() {
         self.dismiss(animated: true, completion: nil)
     }
-    func validateAllFields() throws {
-        if( seasonLabel.text == "") { throw ValidationError("Please enter Season") }
-        if( episodeLabel.text == ""){ throw ValidationError("Please enter Episode") }
+    func validateAllFields()  {
+        var error: String?
+        if( seasonLabel.text == "") { error = "Please enter Season" }
+        if( episodeLabel.text == ""){ error = "Please enter Episode" }
         if( episodeTitleLabel.text == "") {
-            throw ValidationError("Please enter Episode title.")
+            error = "Please enter Episode title."
         }
-        if( yourNoteLabel.text == "") { throw ValidationError("Please enter Your Note.") }
- 
+        if( yourNoteLabel.text == "") { error = "Please enter Your Note." }
+        
+        
+        if  error != nil {
+            AlertManager.shared.showAlert(with: nil, localizeDescription: error,title: nil)
+            return
+        }
+        updateOrAddScreenControl()
+        Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(delayedAction), userInfo: nil, repeats: false)
     }
   
 
 }
 
-struct ValidationError: Error {
-    var localizedDescription: String
-    init(_ message: String) { self.localizedDescription = message }
-}

@@ -36,8 +36,7 @@ final class EpisodeViewController: UIViewController {
                 self.allEpisodes = episodes
             }
             else {
-                print(error?.localizedDescription)
-                AlertManager.shared.showAlert(with: .wrongInput, localizeDescription: nil)
+                AlertManager.shared.showAlert(with: .wrongInput, localizeDescription: error?.localizedDescription,title: nil)
             }
         }
     }
@@ -51,7 +50,7 @@ extension EpisodeViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "EpisodeCell", for: indexPath) as? EpisodeTableViewCell, let model = allEpisodes?[indexPath.row] else {
-            AlertManager.shared.showAlert(with: .wrongInput, localizeDescription: nil)
+            AlertManager.shared.showAlert(with: .wrongInput, localizeDescription: nil,title: nil)
             return UITableViewCell()
         }
         cell.configureCell(model: model)
