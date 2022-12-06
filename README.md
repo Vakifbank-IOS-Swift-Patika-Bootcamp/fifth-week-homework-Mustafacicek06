@@ -1,4 +1,5 @@
 # fifth-week-homework
+<img width="896" alt="Screenshot 2022-12-06 at 23 24 42" src="https://user-images.githubusercontent.com/52332960/206015403-f4c859ac-e506-42ec-a641-5b80d21c7eca.png">
 
 ## 1- Breaking Bad api uygulamamıza persistant özelliği kazandıracağız.
 
